@@ -36,67 +36,99 @@ const SignupPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-sm">
-                <div>
-                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                        Create your account
+        <div className="min-h-screen flex bg-gray-50">
+            <div className="hidden lg:flex lg:w-1/2 bg-gray-900 relative overflow-hidden">
+                <img
+                    src="https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1280&q=80"
+                    alt="Tech"
+                    className="absolute inset-0 w-full h-full object-cover opacity-40"
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-black/80 to-brand-blue/20"></div>
+                <div className="relative z-10 flex flex-col justify-center px-16">
+                    <div className="flex items-center gap-3 mb-12">
+                        <svg className="w-8 h-8 fill-current text-brand-blue" viewBox="0 0 24 24">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                        </svg>
+                        <span className="text-white font-bold text-2xl tracking-tight">AnythingGadgets</span>
+                    </div>
+                    <h2 className="text-4xl font-extrabold text-white leading-tight mb-4">
+                        Join thousands of<br />happy shoppers.
                     </h2>
+                    <p className="text-gray-400 text-lg leading-relaxed max-w-sm">
+                        Create your free account and start exploring the best tech deals today.
+                    </p>
                 </div>
-                <form className="mt-8 space-y-6" onSubmit={handleSignup}>
-                    <div className="rounded-md shadow-sm -space-y-px">
-                        <div className="mb-2">
+            </div>
+
+            <div className="flex-1 flex items-center justify-center px-6 py-12">
+                <div className="w-full max-w-sm">
+                    <div className="lg:hidden flex items-center gap-2 mb-8">
+                        <svg className="w-6 h-6 fill-current text-brand-blue" viewBox="0 0 24 24">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                        </svg>
+                        <span className="text-brand-blue font-bold text-xl tracking-tight">AnythingGadgets</span>
+                    </div>
+
+                    <h1 className="text-2xl font-bold text-gray-900 mb-1">Create your account</h1>
+                    <p className="text-gray-500 text-sm mb-8">It's free and only takes a minute</p>
+
+                    <form onSubmit={handleSignup} className="space-y-4">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1.5">Full name</label>
                             <input
                                 type="text"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-brand-blue focus:border-brand-blue focus:z-10 sm:text-sm"
-                                placeholder="Full Name"
+                                placeholder="Your full name"
                                 value={fullName}
                                 onChange={(e) => setFullName(e.target.value)}
+                                className="block w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue focus:bg-white transition-all placeholder-gray-400"
                             />
                         </div>
                         <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1.5">Email address</label>
                             <input
                                 type="email"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-brand-blue focus:border-brand-blue focus:z-10 sm:text-sm"
-                                placeholder="Email address"
+                                placeholder="you@example.com"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                className="block w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue focus:bg-white transition-all placeholder-gray-400"
                             />
                         </div>
                         <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1.5">Password</label>
                             <input
                                 type="password"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-brand-blue focus:border-brand-blue focus:z-10 sm:text-sm"
-                                placeholder="Password"
+                                placeholder="Create a password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
+                                className="block w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue focus:bg-white transition-all placeholder-gray-400"
                             />
                         </div>
-                    </div>
 
-                    {error && (
-                        <div className="text-red-500 text-sm text-center">{error}</div>
-                    )}
+                        {error && (
+                            <div className="bg-red-50 text-red-600 text-sm px-4 py-3 rounded-xl border border-red-100">
+                                {error}
+                            </div>
+                        )}
 
-                    <div>
                         <button
                             type="submit"
                             disabled={loading}
-                            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-brand-blue hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-blue"
+                            className="w-full bg-brand-blue hover:bg-blue-600 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold py-3 px-4 rounded-xl transition-colors mt-2"
                         >
-                            {loading ? 'Sign up' : 'Sign up'}
+                            {loading ? 'Creating account...' : 'Create account'}
                         </button>
-                    </div>
+                    </form>
 
-                    <div className="text-sm text-center">
-                        <Link to="/login" className="font-medium text-brand-blue hover:text-blue-500">
-                            Already have an account? Sign in
+                    <p className="text-center text-sm text-gray-500 mt-6">
+                        Already have an account?{' '}
+                        <Link to="/login" className="font-semibold text-brand-blue hover:text-blue-600 transition-colors">
+                            Sign in
                         </Link>
-                    </div>
-                </form>
+                    </p>
+                </div>
             </div>
         </div>
     );

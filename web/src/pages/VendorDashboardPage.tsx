@@ -106,8 +106,8 @@ const VendorDashboardPage: React.FC = () => {
                                         />
                                         <YAxis tick={{ fontSize: 12 }} />
                                         <Tooltip
-                                            contentStyle={{ borderRadius: '12px', border: 'none', shadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
-                                            formatter={(val: number) => [`₦${val.toLocaleString()}`, 'Sales']}
+                                            contentStyle={{ borderRadius: '12px', border: 'none' }}
+                                            formatter={(val: number | string | undefined) => [`₦${Number(val ?? 0).toLocaleString()}`, 'Sales']}
                                         />
                                         <Line
                                             type="monotone"

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import ProductCard from '../components/ProductCard';
+import Toast from '../components/Toast';
 import { Product } from '../types/product';
 import { WishlistService } from '../api/wishlistService';
 import { useAuth } from '../context/AuthContext';
@@ -14,6 +15,7 @@ const WishlistPage: React.FC = () => {
     const navigate = useNavigate();
     const [wishlistItems, setWishlistItems] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
+    const [toast, setToast] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchWishlist = async () => {
@@ -36,22 +38,29 @@ const WishlistPage: React.FC = () => {
 
     if (!user) {
         return (
-            <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center text-center p-4">
+            <div className="min-h-screen bg-gray-50 flex flex-col">
                 <Navbar />
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Please login to view your wishlist</h2>
-                <button
-                    onClick={() => navigate('/login')}
-                    className="bg-brand-blue text-white px-8 py-3 rounded-lg font-bold"
-                >
-                    Login Now
-                </button>
+                <div className="flex-1 flex flex-col items-center justify-center text-center p-4">
+                    <div className="bg-white rounded-2xl p-10 shadow-sm border border-gray-100 max-w-sm w-full">
+                        <Heart size={48} className="mx-auto mb-4 text-gray-300" />
+                        <h2 className="text-xl font-bold text-gray-900 mb-2">Sign in to view your wishlist</h2>
+                        <p className="text-gray-500 text-sm mb-6">Save your favourite products and access them from any device.</p>
+                        <button
+                            onClick={() => navigate('/login')}
+                            className="w-full bg-brand-blue text-white px-8 py-3 rounded-xl font-semibold hover:bg-blue-600 transition-colors"
+                        >
+                            Sign In
+                        </button>
+                    </div>
+                </div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-gray-50">
             <Navbar />
+            {toast && <Toast message={toast} onClose={() => setToast(null)} />}
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="mb-8 border-b border-gray-100 pb-6">
                     <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
@@ -80,7 +89,7 @@ const WishlistPage: React.FC = () => {
                                 onTap={() => navigate(`/product/${product.id}`)}
                                 onAddToCart={() => {
                                     addToCart(product);
-                                    alert("Added to cart");
+                                    setToast('Added to cart');
                                 }}
                             />
                         ))}
